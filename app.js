@@ -2,14 +2,29 @@
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
+let array=data;
+
+  function search(nameKey, myArray){
+    for (let i=0; i < myArray.length; i++) {
+        if (myArray[i].name === nameKey) {
+          console.log(myArray[i]);
+            return myArray[i];
+        }
+    }
+}
+
+// search("Bob",array);
+
+app(array)
+
 
 // app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-      var foundHeight = searchByName(people);
-      mainMenu(foundHeight, people);
+      var foundperson = searchByName(people);
+      mainMenu(person, people);
       break;
     case "no": 
     searchByGender(people);
@@ -21,6 +36,20 @@ function app(people){
       
   }
 } 
+
+
+function findById(data, id) {
+    for(let i = 0; i < data.length; i++) {
+        if (data[i].id === id) {
+            return data[i];
+        } else if (data[i].parents && data[i].parents.length && typeof data[i].parents === "object") {
+            findById(data[i].children, id);
+        }
+    }
+}
+
+
+
 
 //test to commit
 // Menu function to call once you find who you are looking for
@@ -55,15 +84,12 @@ function mainMenu(person, people){
   }
 }
 
-let array=people
-console.log(array)
-
 function searchByName(people){
-  var inputHeight = promptFor("What is the person's first name?", chars);
+  var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
 
-  var foundHeight = people.filter(function(person){
-    if(person.inputHeight === inputHeight && person.lastName === lastName){
+  var foundName = people.filter(function(person){
+    if(person.firstName === firstName && person.lastName === lastName){
       return true;
       //promptFor("Do you know the person height?", chars);
     }
@@ -78,7 +104,7 @@ function searchByName(people){
     }
   })
   // TODO: find the person using the name they entered
-  return foundHeight;
+  return foundName;
 }
 
 
@@ -122,8 +148,6 @@ function displayPerson(person){
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
-
-people.age=getAge(people.dob);
 
 
 
@@ -192,4 +216,3 @@ function getHeight(heightStringFeet, heightStringInches){
 getHeight(6,2)
 
 getHeight('6','2')
-
