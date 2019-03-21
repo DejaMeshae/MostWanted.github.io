@@ -8,10 +8,11 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-      var foundPerson = searchByName(people);
-      mainMenu(foundPerson, people);
+      var foundHeight = searchByName(people);
+      mainMenu(foundHeight, people);
       break;
-    case 'no':
+    case "no": 
+    searchByGender(people);
       // TODO: search by traits
       break;
       default:
@@ -19,7 +20,7 @@ function app(people){
       break;
       ////thing
   }
-}
+} 
 //test to commit
 
 // Menu function to call once you find who you are looking for
@@ -32,7 +33,7 @@ function mainMenu(person, people){
     return app(people); // restart
   }
 
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  var displayOption = prompt("Found " + person.inputHeight + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch(displayOption){
     case "info":
@@ -55,11 +56,35 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars);
+  var inputHeight = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
 
-  var foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
+  var foundHeight = people.filter(function(person){
+    if(person.inputHeight === inputHeight && person.lastName === lastName){
+      return true;
+      //promptFor("Do you know the person height?", chars);
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person using the name they entered
+  return foundHeight;
+}
+
+///////WORKING ON THIS TO SEARCH BY HEIGHT////// get to to where they can search by height
+//////create an array for the heights then filter/sort through
+//////////map [x] then do an array of that min height = [0] min height [-1]. Make an array of objects///
+/*function searchByHeight(people){
+  var inputHeight = promptFor("What is the person's height?", chars);
+
+   //= people.map([0] < );
+
+  const map1 = array1.map(x => x * 2);
+function 
+
+  var foundHeight = people.filter(function(person){
+    if(person.inputHeight > [0]){
       return true;
     }
     else{
@@ -67,26 +92,50 @@ function searchByName(people){
     }
   })
   // TODO: find the person using the name they entered
-  return foundPerson;
+  return foundHeight;
+}*/
+  
+
+
+function searchByGender(people){
+  var inputGender = promptFor("Is the person a male or female?", chars);
+
+  var foundGender = people.filter(function(person){
+    if(person.gender === inputGender){
+      //mainMenu(person, people);?? to get to diplay males or female based on user input 
+      return true;
+      //promptFor("What is the person's gender?", chars);
+    }
+    else{
+      alert("Please enter male or female")
+      return searchByGender(people);
+    }
+  })
+  // TODO: find the person using the gender they entered
+  return foundGender;
 }
+  
+
 
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
+    return person.inputHeight + " " + person.lastName;
   }).join("\n"));
 }
+
 
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  var personInfo = "First Name: " + person.firstName + "\n";
+  var personInfo = "First Name: " + person.inputHeight + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  var PersonHeight = "" 
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
 
-// function that prompts and validates user input
+// function that prompts and validates user input///////USE FOR TO ASK QUESTIONS 
 function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
