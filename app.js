@@ -17,8 +17,10 @@ function app(people){
       default:
     app(people); // restart app
       break;
+      ////thing
   }
 }
+//test to commit
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
