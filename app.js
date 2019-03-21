@@ -65,6 +65,12 @@ function searchByName(people){
     if(person.firstName === firstName && person.lastName === lastName){
       return true;
     }
+    else if(person.firstName === firstName){
+      return true;
+    }
+    else if(person.lastName=== lastName){
+        return true;
+        }
     else{
       return false;
     }
@@ -88,12 +94,17 @@ function displayPerson(person){
   alert(personInfo);
 }
 
+people.age=getAge(people.dob);
+
+
+
+
 function getAge(dateString) 
 {
-    var today = new Date();
-    var birthDate = new Date(dateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
+    let today = new Date();
+    let birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
     {
         age--;
@@ -133,7 +144,7 @@ function getAge(dateString) {
 
 
 
-
+//Test test
 
 getAge('01/24/1992')
 
