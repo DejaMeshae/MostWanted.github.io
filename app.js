@@ -17,10 +17,10 @@ function app(people){
       default:
     app(people); // restart app
       break;
-      ////thing
+      
   }
 }
-//test to commit
+
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -54,6 +54,9 @@ function mainMenu(person, people){
   }
 }
 
+let array=people
+console.log(array)
+
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
@@ -69,7 +72,6 @@ function searchByName(people){
   // TODO: find the person using the name they entered
   return foundPerson;
 }
-
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -86,6 +88,18 @@ function displayPerson(person){
   alert(personInfo);
 }
 
+function getAge(dateString) 
+{
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+    {
+        age--;
+    }
+    return age;
+}
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
@@ -103,3 +117,39 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+
+function getAge(dateString) {
+    let today = new Date();
+    let birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    console.log(age);
+    return age;
+}
+
+
+
+
+
+getAge('01/24/1992')
+
+// data.map(function(el){
+//   el=data.height;
+//   console.log(data.height);
+//   return el=data.height});
+
+function getHeight(heightStringFeet, heightStringInches){
+  let feet=heightStringFeet*12;
+  let inches=heightStringInches;
+  let height=feet+inches;
+  return height
+}
+
+getHeight(6,2)
+
+getHeight('6','2')
+
