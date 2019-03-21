@@ -18,7 +18,7 @@ function app(people){
       default:
     app(people); // restart app
       break;
-      ////thing
+      
   }
 } 
 
@@ -55,6 +55,9 @@ function mainMenu(person, people){
   }
 }
 
+let array=people
+console.log(array)
+
 function searchByName(people){
   var inputHeight = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
@@ -64,6 +67,12 @@ function searchByName(people){
       return true;
       //promptFor("Do you know the person height?", chars);
     }
+    else if(person.firstName === firstName){
+      return true;
+    }
+    else if(person.lastName=== lastName){
+        return true;
+        }
     else{
       return false;
     }
@@ -72,28 +81,7 @@ function searchByName(people){
   return foundHeight;
 }
 
-///////WORKING ON THIS TO SEARCH BY HEIGHT////// get to to where they can search by height
-//////create an array for the heights then filter/sort through
-//////////map [x] then do an array of that min height = [0] min height [-1]. Make an array of objects///
-/*function searchByHeight(people){
-  var inputHeight = promptFor("What is the person's height?", chars);
 
-   //= people.map([0] < );
-
-  const map1 = array1.map(x => x * 2);
-function 
-
-  var foundHeight = people.filter(function(person){
-    if(person.inputHeight > [0]){
-      return true;
-    }
-    else{
-      return false;
-    }
-  })
-  // TODO: find the person using the name they entered
-  return foundHeight;
-}*/
   
 
 
@@ -135,7 +123,24 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-// function that prompts and validates user input///////USE FOR TO ASK QUESTIONS 
+people.age=getAge(people.dob);
+
+
+
+
+function getAge(dateString) 
+{
+    let today = new Date();
+    let birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
+    {
+        age--;
+    }
+    return age;
+}
+// function that prompts and validates user input
 function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
@@ -152,3 +157,39 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+
+function getAge(dateString) {
+    let today = new Date();
+    let birthDate = new Date(dateString);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    console.log(age);
+    return age;
+}
+
+
+
+//Test test
+
+getAge('01/24/1992')
+
+// data.map(function(el){
+//   el=data.height;
+//   console.log(data.height);
+//   return el=data.height});
+
+function getHeight(heightStringFeet, heightStringInches){
+  let feet=heightStringFeet*12;
+  let inches=heightStringInches;
+  let height=feet+inches;
+  return height
+}
+
+getHeight(6,2)
+
+getHeight('6','2')
+
