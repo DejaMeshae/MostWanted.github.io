@@ -18,8 +18,8 @@ function app(people){
       break;
     case "no": 
   }
-    var searchTrait = promptFor("Please enter the trait you would like to search by: \r\n First Name \r\n Last Name \r\n Gender \r\n Age \r\n Height \r\n Weight \r\n Eye color \r\n Occupation").toLowerCase();
-    switch(searchT){
+    var searchTrait = prompt("Please enter the trait you would like to search by: \r\n First Name \r\n Last Name \r\n Gender \r\n Age \r\n Height \r\n Weight \r\n Eye color \r\n Occupation").toLowerCase();
+    switch(searchTrait){
       case 'gender':
         var foundGender= searchByGender();
         mainMenu(foundGender, people);
@@ -147,7 +147,7 @@ function searchByGender(){
     }
   })
   // TODO: find the person using the gender they entered
-  return foundGender[0]; ////added for loop
+  return foundGender; ////added for loop but only goes through the first person
 }
 
 
@@ -254,12 +254,12 @@ function getAge(dateString) ////////fit this into the searchByDob function
 
 
 // function that prompts and validates user input
-/*function promptFor(question, valid){
+function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
   } while(!response || !valid(response));
   return response;
-}*/
+}
 
 
 
