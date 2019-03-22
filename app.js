@@ -37,19 +37,20 @@ function app(people){
 } 
 
 
-function findById(data, id) {
+function findParentsById(data, id) {
   let i=0
     for( i; i < data.length; i++) {
-        if (data[i].parents === id) {
+        if (data[i].parents == id) {
           console.log(data[i].firstName+' '+data[i].lastName);
             return data[i];
-        } else if (data[i].parents && data[i].parents.length && typeof data[i].parents === "object") {
-            findById(data[i].parents, id);
+        } 
+        else if(data[i].parents && data[i].parents.length && typeof data[i].parents == "object"){
+            findParentsById(data[i].parents, id);
         }
     }
 }
 
-findById(people, 409574486)
+findParentsById(people, 401222887)
 
 
 //test to commit
