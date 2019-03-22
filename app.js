@@ -22,8 +22,11 @@ function app(people){
       case 'gender':
         var foundGender= searchByGender(people);
         mainMenu(foundGender, people);
-        
       
+      case 'age':
+        var foundPersonByAge= searchByAge(people);         
+        mainMenu(foundPersonByAge, people);
+
       case "eye color": 
         var foundEyeColor= searchByEyeColor(people);
         mainMenu(foundEyeColor, people);
@@ -31,7 +34,7 @@ function app(people){
 
         case "occupation":
 
-            ///change to "what do you to search by then list traits "
+            
 
 
           // TODO: search by traits
@@ -88,8 +91,8 @@ function mainMenu(person, people){
     app(people); // restart
     break;
     case "quit":
-    alert("Thank you for using our search engine! \r\n\ Now go play and stop looking up people on the internet.", chars);
-    break; ////////////creates endless loop FIX THIS
+    alert("Thank you for using our search engine!", chars);
+    return app(people) ////////////goes back to restart
     default:
   }
   var searchComplete = promptFor("Would you like more info on that person or are you finished? Please enter 'yes' for more info or 'no' for im finished", yesNo).toLowerCase();
@@ -145,15 +148,15 @@ function searchByGender(people){
   return foundGender;
 }
 
-///////trying to impliment age function//////
-/*function searchByAge(people){
+/////////To impliment age function into search by age 
+function searchByAge(people){
   var userInputForAge = promptFor("Enter the person's age", chars);
-let i;
+  let i;
+  for(i=0; i < people.length; i++)
+  if(userInputForAge === getAge(person[i].dob)){
 
-let person[i].age = getAge(person[i].dob)
-for(i=0; i < people.length; i++)
   var foundPersonByAge = people.filter(function(person){
-    if(dateString = person[i].age){
+    if(getAge (dateString) = person[i].age){
       displayPerson(person);
       return true;              
     }
@@ -164,7 +167,14 @@ for(i=0; i < people.length; i++)
   })
   // TODO: find the person using the birthday they entered
   return foundPersonByAge;
-}*/
+}
+}
+
+
+//////SEARCH BY HEIGHT WILL GO HERE, CURRENTLY WORKING ON IT AT LINE 296
+
+
+
 
 function searchByWeight(people){
   var inputWeight = promptFor("How much does the person weigh?", chars);
@@ -200,7 +210,6 @@ function searchByEyeColor(people){
 }
 
 
-
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -221,15 +230,9 @@ function displayPerson(person){
   personInfo += "Weight: " + person.weight + "\n"; 
   personInfo += "Eye Color: " + person.eyeColor + "\n"; 
   personInfo += "Occupation: " + person.occupation + "\n"; 
-
-  // TODO: finish getting the rest of the information to display
-  //////display the object in the array. if user were to click info///////
+  // DONE YAY! Display the object in the array. if user were to click info///////
   alert(personInfo);
 }
-
-
-//people.age=getAge(people.dob);
-
 
 
 function getAge(dateString) ////////fit this into the searchByDob function
@@ -279,12 +282,6 @@ function getAge(dateString) {
 }
 
 
-//Test test
-
-// data.map(function(el){
-//   el=data.height;
-//   console.log(data.height);
-//   return el=data.height});
 
 function getHeight(heightStringFeet, heightStringInches){
   let feet=heightStringFeet*12;
@@ -299,6 +296,8 @@ getHeight(6,2)
 getHeight('6','2')
 
 ///////////Height search needs work///////
+////////idea: for the get age function we can do people.age = getAge(dateString) function///////
+
 function searchByHeight(people){
   var inputHeight = promptFor("How tall is the person you're looking for?", chars);
 
@@ -315,5 +314,4 @@ function searchByHeight(people){
   return foundHeight;
 }
 
-////////idea: for the get age function we can do people.age = getAge(dateString) function///////
   
