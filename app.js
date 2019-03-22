@@ -2,7 +2,7 @@
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
-let array=data;
+let people=data;
 
   function search(nameKey, myArray){
     for (let i=0; i < myArray.length; i++) {
@@ -15,7 +15,6 @@ let array=data;
 
 // search("Bob",array);
 
-app(array)
 
 
 // app is the function called to start the entire application
@@ -39,16 +38,18 @@ function app(people){
 
 
 function findById(data, id) {
-    for(let i = 0; i < data.length; i++) {
-        if (data[i].id === id) {
+  let i=0
+    for( i; i < data.length; i++) {
+        if (data[i].parents === id) {
+          console.log(data[i].firstName+' '+data[i].lastName);
             return data[i];
         } else if (data[i].parents && data[i].parents.length && typeof data[i].parents === "object") {
-            findById(data[i].children, id);
+            findById(data[i].parents, id);
         }
     }
 }
 
-
+findById(people, 409574486)
 
 
 //test to commit
@@ -196,7 +197,6 @@ function getAge(dateString) {
 }
 
 
-
 //Test test
 
 getAge('01/24/1992')
@@ -208,8 +208,9 @@ getAge('01/24/1992')
 
 function getHeight(heightStringFeet, heightStringInches){
   let feet=heightStringFeet*12;
-  let inches=heightStringInches;
+  let inches=heightStringInches*1;
   let height=feet+inches;
+  console.log(height);
   return height
 }
 
