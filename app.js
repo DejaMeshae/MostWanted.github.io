@@ -9,7 +9,8 @@ let people=data;
 
 // app is the function called to start the entire application
 function app(people){
-  var searchType = promptFor("Do you know the name of the person you are looking for? Please enter 'yes' or 'no'", yesNo).toLowerCase();
+  var searchType;
+   searchType = promptFor("Do you know the name of the person you are looking for? Please enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
       var foundName= searchByName(people);
@@ -18,25 +19,23 @@ function app(people){
     case "no": 
   }
     var searchTrait = promptFor("Please enter the trait you would like to search by: \r\n First Name \r\n Last Name \r\n Gender \r\n Age \r\n Height \r\n Weight \r\n Eye color \r\n Occupation").toLowerCase();
-    switch(searchTrait){
+    switch(searchT){
       case 'gender':
-        var foundGender= searchByGender(people);
+        var foundGender= searchByGender();
         mainMenu(foundGender, people);
-      
+        break;
       case 'age':
         var foundPersonByAge= searchByAge(people);         
         mainMenu(foundPersonByAge, people);
-
+        break;
       case "eye color": 
         var foundEyeColor= searchByEyeColor(people);
         mainMenu(foundEyeColor, people);
         break;
-
         case "occupation":
-
-            
-
-
+        var foundOccupation= searchByOccupation(people);
+        mainMenu(foundOccupation, people);
+        break;
           // TODO: search by traits
         default:
     app(people); // restart app
@@ -131,12 +130,15 @@ function searchByName(people){
 
 
 
-function searchByGender(people){
+function searchByGender(){
   var inputGender = promptFor("Is the person male or female?", chars);
+  let i;
 
+  for(i=0; i < people.length; i++) 
   var foundGender = people.filter(function(person){
     if(person.gender === inputGender){
       displayPerson(person); //////create a list that displays with all info in one box/like alert but not 
+      mainMenu(person, people);
       return true;
     }
     else{
@@ -145,8 +147,10 @@ function searchByGender(people){
     }
   })
   // TODO: find the person using the gender they entered
-  return foundGender;
+  return foundGender[0]; ////added for loop
 }
+
+
 
 /////////To impliment age function into search by age 
 function searchByAge(people){
@@ -247,13 +251,15 @@ function getAge(dateString) ////////fit this into the searchByDob function
     }
     return age;
 }
+
+
 // function that prompts and validates user input
-function promptFor(question, valid){
+/*function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
   } while(!response || !valid(response));
   return response;
-}
+}*/
 
 
 
