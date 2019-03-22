@@ -4,16 +4,16 @@ Build all of your functions for displaying and gathering information below (GUI)
 */
 let people=data;
 
-  function search(nameKey, myArray){
-    for (let i=0; i < myArray.length; i++) {
-        if (myArray[i].name === nameKey) {
-          console.log(myArray[i]);
-            return myArray[i];
-        }
-    }
-}
+//   function search(nameKey, myArray){
+//     for (let i=0; i < myArray.length; i++) {
+//         if (myArray[i].name === nameKey) {
+//           console.log(myArray[i]);
+//             return myArray[i];
+//         }
+//     }
+// }
 
-// search("Bob",array);
+// // search("Bob",array);
 
 
 
@@ -38,19 +38,32 @@ function app(people){
 
 
 function findParentsById(data, id) {
-  let i=0
-    for( i; i < data.length; i++) {
-        if (data[i].parents == id) {
+  let i;
+    for( i=0; i < data.length; i++) {
+        if (data[i].parents[0] === id ||data[i].parents[1] === id) {
           console.log(data[i].firstName+' '+data[i].lastName);
-            return data[i];
-        } 
-        else if(data[i].parents && data[i].parents.length && typeof data[i].parents == "object"){
-            findParentsById(data[i].parents, id);
+        }  
+        else{
         }
     }
 }
 
-findParentsById(people, 401222887)
+// let arr = [
+//     { name:"string 1", value:"this", other: "that" },
+//     { name:"string 2", value:"this", other: "that" }
+// ];
+
+// let obj = arr.find((o, i) => {
+//     if (o.name === 'string 1') {
+//         arr[i] = { name: 'new string', value: 'this', other: 'that' };
+//         return true; // stop searching
+//     }
+// });
+
+// console.log(arr);
+
+
+findParentsById(people, 693243224)
 
 
 //test to commit
@@ -200,8 +213,6 @@ function getAge(dateString) {
 
 //Test test
 
-getAge('01/24/1992')
-
 // data.map(function(el){
 //   el=data.height;
 //   console.log(data.height);
@@ -214,7 +225,3 @@ function getHeight(heightStringFeet, heightStringInches){
   console.log(height);
   return height
 }
-
-getHeight(6,2)
-
-getHeight('6','2')
