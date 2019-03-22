@@ -4,17 +4,6 @@ Build all of your functions for displaying and gathering information below (GUI)
 */
 let people=data;
 
-//   function search(nameKey, myArray){
-//     for (let i=0; i < myArray.length; i++) {
-//         if (myArray[i].name === nameKey) {
-//           console.log(myArray[i]);
-//             return myArray[i];
-//         }
-//     }
-// }
-
-// // search("Bob",array);
-
 
 
 
@@ -69,21 +58,6 @@ function findParentsById(data, id) {
         }
     }
 }
-
-// let arr = [
-//     { name:"string 1", value:"this", other: "that" },
-//     { name:"string 2", value:"this", other: "that" }
-// ];
-
-// let obj = arr.find((o, i) => {
-//     if (o.name === 'string 1') {
-//         arr[i] = { name: 'new string', value: 'this', other: 'that' };
-//         return true; // stop searching
-//     }
-// });
-
-// console.log(arr);
-
 
 findParentsById(people, 693243224)
 
