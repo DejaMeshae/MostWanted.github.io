@@ -2,6 +2,20 @@
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
+let people=data;
+
+//   function search(nameKey, myArray){
+//     for (let i=0; i < myArray.length; i++) {
+//         if (myArray[i].name === nameKey) {
+//           console.log(myArray[i]);
+//             return myArray[i];
+//         }
+//     }
+// }
+
+// // search("Bob",array);
+
+
 
 
 // app is the function called to start the entire application
@@ -37,6 +51,41 @@ function app(people){
       break;   
   }
 } 
+
+
+function findParentsById(data, id) {
+  let i;
+    for( i=0; i < data.length; i++) {
+        if (data[i].parents[0] === id) {
+          console.log(data[i].firstName+' '+data[i].lastName);
+          findParentsById(people, data[i].id);
+        }
+        else if(data[i].parents[1] === id) {
+          console.log(data[i].firstName+' '+data[i].lastName);
+          findParentsById(people, data[i].id);
+
+        }  
+        else{
+        }
+    }
+}
+
+// let arr = [
+//     { name:"string 1", value:"this", other: "that" },
+//     { name:"string 2", value:"this", other: "that" }
+// ];
+
+// let obj = arr.find((o, i) => {
+//     if (o.name === 'string 1') {
+//         arr[i] = { name: 'new string', value: 'this', other: 'that' };
+//         return true; // stop searching
+//     }
+// });
+
+// console.log(arr);
+
+
+findParentsById(people, 693243224)
 
 //test to commit
 // Menu function to call once you find who you are looking for
@@ -78,7 +127,6 @@ function mainMenu(person, people){
     break///////creates an infinate loop figure out how to end it 
   }
 }
-
 
 function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
@@ -206,7 +254,6 @@ function displayPerson(person){
 }
 
 
-
 //people.age=getAge(people.dob);
 
 
@@ -258,10 +305,7 @@ function getAge(dateString) {
 }
 
 
-
 //Test test
-
-getAge('01/24/1992')
 
 // data.map(function(el){
 //   el=data.height;
@@ -270,8 +314,9 @@ getAge('01/24/1992')
 
 function getHeight(heightStringFeet, heightStringInches){
   let feet=heightStringFeet*12;
-  let inches=heightStringInches;
+  let inches=heightStringInches*1;
   let height=feet+inches;
+  console.log(height);
   return height
 }
 
