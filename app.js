@@ -40,8 +40,14 @@ function app(people){
 function findParentsById(data, id) {
   let i;
     for( i=0; i < data.length; i++) {
-        if (data[i].parents[0] === id ||data[i].parents[1] === id) {
+        if (data[i].parents[0] === id) {
           console.log(data[i].firstName+' '+data[i].lastName);
+          findParentsById(people, data[i].id);
+        }
+        else if(data[i].parents[1] === id) {
+          console.log(data[i].firstName+' '+data[i].lastName);
+          findParentsById(people, data[i].id);
+
         }  
         else{
         }
@@ -64,7 +70,6 @@ function findParentsById(data, id) {
 
 
 findParentsById(people, 693243224)
-
 
 //test to commit
 // Menu function to call once you find who you are looking for
