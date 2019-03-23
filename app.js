@@ -46,14 +46,17 @@ function app(people){
 function compareParentsById(data,id){
   let i;
   for(i=0;i<data.length;i++){
-    if(findParentsById(data[i].id) === findParentsById(id)){
+    if(data[i].parents[0] === id.parents[0]||data[i].parents[1]=== id.parents[0]){
+      console.log(data[i].firstName+' '+data[i].lastName);
+    }
+    else if(data[i].parents[0] === id.parents[0]||data[i].parents[1]=== id.parents[0]){
       console.log(data[i].firstName+' '+data[i].lastName);
     }
   else{
   }
 }
 }
-compareParentsById(people, 878013758)
+compareParentsById(people, people[10])
 
 function findFamilyMembersById(data,id){
   findParentsById(data, id);
@@ -72,11 +75,9 @@ function findParentsById(data, id) {
   let i;
     for( i=0; i < data.length; i++) {
         if (data[i].parents[0] === id) {
-          console.log(data[i].firstName+' '+data[i].lastName);
           findParentsById(people, data[i].id);
         }
         else if(data[i].parents[1] === id) {
-          console.log(data[i].firstName+' '+data[i].lastName);
           findParentsById(people, data[i].id);
 
         }  
