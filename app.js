@@ -138,11 +138,17 @@ function searchByName(people){
 }
 
 
+<<<<<<< HEAD
 
 function searchByGender(){
   var inputGender = promptFor("Is the person male or female?", chars);
   let i;
 
+=======
+
+function searchByGender(){
+  var inputGender = promptFor("Is the person male or female?", chars);
+  let i;
   for(i=0; i < people.length; i++) 
   var foundGender = people.filter(function(person){
     if(person.gender === inputGender){
