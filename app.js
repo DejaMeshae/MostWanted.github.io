@@ -43,15 +43,30 @@ function app(people){
   }
 } 
 
+function compareParentsById(data,id){
+  let i;
+  for(i=0;i<data.length;i++){
+    if(findParentsById(data[i].id) === findParentsById(id)){
+      console.log(data[i].firstName+' '+data[i].lastName);
+    }
+  else{
+  }
+}
+}
+compareParentsById(people, 878013758)
+
 function findFamilyMembersById(data,id){
+  findParentsById(data, id);
+  compareParentsById(data,id);
   let i;
   for(i=0;i<data.length;i++){
     if (data[i].currentSpouse[0]===id){
       console.log(data[i].firstName+' '+data[i].lastName);
     }
+    else if(data[i].parents){
   }
 }
-
+}
 
 function findParentsById(data, id) {
   let i;
@@ -138,13 +153,9 @@ function searchByName(people){
 }
 
 
-<<<<<<< HEAD
-
-function searchByGender(){
-  var inputGender = promptFor("Is the person male or female?", chars);
-  let i;
-
-=======
+// function searchByGender(){
+//   var inputGender = promptFor("Is the person male or female?", chars);
+//   let i;
 
 function searchByGender(){
   var inputGender = promptFor("Is the person male or female?", chars);
@@ -319,18 +330,18 @@ getHeight('6','2')
 ///////////Height search needs work///////
 ////////idea: for the get age function we can do people.age = getAge(dateString) function///////
 
-function searchByHeight(people){
-  var inputHeight = promptFor("How tall is the person you're looking for?", chars);
+// function searchByHeight(people){
+//   var inputHeight = promptFor("How tall is the person you're looking for?", chars);
 
-  var foundHeight = people.filter(function(person){
-    if(person.height === inputHeight){
-      return true;
-    }
-    else{
-      alert("Please enter height measured in feet")
-      return searchByHeight(people);
-    }
-  })
-  // TODO: find the person using the height they entered
-  return foundHeight;
-}
+//   var foundHeight = people.filter(function(person){
+//     if(person.height === inputHeight){
+//       return true;
+//     }
+//     else{
+//       alert("Please enter height measured in feet")
+//       return searchByHeight(people);
+//     }
+//   })
+//   // TODO: find the person using the height they entered
+//   return foundHeight;
+// }
