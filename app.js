@@ -2,7 +2,7 @@
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
-let people=data;
+let thing;
 
 
 
@@ -10,6 +10,7 @@ let people=data;
 // app is the function called to start the entire application
 function app(people){
   var searchType;
+  thing = people;
    searchType = promptFor("Do you know the name of the person you are looking for? Please enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
@@ -21,7 +22,7 @@ function app(people){
     var searchTrait = prompt("Please enter the trait you would like to search by: \r\n First Name \r\n Last Name \r\n Gender \r\n Age \r\n Height \r\n Weight \r\n Eye color \r\n Occupation").toLowerCase();
     switch(searchTrait){
       case 'gender':
-        var foundGender= searchByGender();
+        var foundGender= searchByGender(people);
         mainMenu(foundGender, people);
         break;
       case 'age':
@@ -36,6 +37,8 @@ function app(people){
         var foundOccupation= searchByOccupation(people);
         mainMenu(foundOccupation, people);
         break;
+        case 'weight':
+        let foundWeight= searchByWeight(people);
           // TODO: search by traits
         default:
     app(people); // restart app
@@ -64,7 +67,7 @@ function test(data,id,type){
   console.log(data[id][type])
 }
 
-test(people,0, "dob");
+//test(people,0, "dob");
 
 function displayFamilymembers(data,id,type){
      let i;
@@ -79,7 +82,6 @@ function displayFamilymembers(data,id,type){
   }
 }
 
-displayFamilymembers(people,people[11],'currentSpouse')
 
 // function findFamilyMembersById(data,index,section, type){
 //   let i;
@@ -100,18 +102,19 @@ function findDesendents(data, id) {
   let i;
     for( i=0; i < data.length; i++) {
         if (data[i].parents[0] === id) {
-          findDesendents(people, data[i].id);
+          findDesendents(data, data[i].id);
+           console.log(data[i].firstName+' '+data[i].lastName);
         }
         else if(data[i].parents[1] === id) {
-          findDesendents(people, data[i].id);
-
+          findDesendents(data, data[i].id);
+           console.log(data[i].firstName+' '+data[i].lastName);
         }  
         else{
         }
 }
 }
 
-// findDesendents(people, 693243224)
+
 
 //test to commit
 // Menu function to call once you find who you are looking for
@@ -185,21 +188,21 @@ function searchByName(people){
 //   var inputGender = promptFor("Is the person male or female?", chars);
 //   let i;
 
-function searchByGender(){
+function searchByGender(data){
   var inputGender = promptFor("Is the person male or female?", chars);
   let i;
-  for(i=0; i < people.length; i++) 
-  var foundGender = people.filter(function(person){
-    if(person.gender === inputGender){
+  for(i=0; i < data.length; i++) 
+  //var foundGender = data.filter(function(person){
+    if(data[i].gender === inputGender){
       displayPerson(person); //////create a list that displays with all info in one box/like alert but not 
-      mainMenu(person, people);
+      //mainMenu(person, data);
       return true;
     }
     else{
       //alert("Have you found the person you're looking for? click okay to return to the start.")
       return false;
     }
-  })
+  
   // TODO: find the person using the gender they entered
   return foundGender; ////added for loop but only goes through the first person
 }
@@ -209,13 +212,15 @@ function searchByGender(){
 /////////To impliment age function into search by age 
 function searchByAge(people){
   var userInputForAge = promptFor("Enter the person's age", chars);
+  people.age=getAge(people.dob);
   let i;
-  for(i=0; i < people.length; i++)
-  if(userInputForAge === getAge(person[i].dob)){
+  for(i=0; i < people.length; i++){
+
+  if(userInputForAge === people[i].age){
 
   var foundPersonByAge = people.filter(function(person){
-    if(getAge (dateString) = person[i].age){
-      displayPerson(person);
+    if(getAge (dateString) = people[i].age){
+      displayPerson(foundPersonByAge);
       return true;              
     }
     else{ 
@@ -227,10 +232,10 @@ function searchByAge(people){
   return foundPersonByAge;
 }
 }
+}
 
 
 //////SEARCH BY HEIGHT WILL GO HERE, CURRENTLY WORKING ON IT AT LINE 296
-
 
 
 
