@@ -56,25 +56,75 @@ function app(people){
   }
 } 
 
+function compareParentsById(data,id){
+  let i;
+  for(i=0;i<data.length;i++){
 
-function findParentsById(data, id) {
+    if(data[i].parents[0] === id.parents[0]||data[i].parents[1]=== id.parents[0]){
+      console.log(data[i].firstName+' '+data[i].lastName);
+    }
+    else if(data[i].parents[0] === id.parents[0]||data[i].parents[1]=== id.parents[0]){
+      console.log(data[i].firstName+' '+data[i].lastName);
+    }
+  else{
+  }
+}
+}
+// compareParentsById(people, people[10])
+
+function test(data,id,type){
+  //type=type.toString
+  console.log(data[id][type])
+}
+
+test(people,0, "dob");
+
+function displayFamilymembers(data,id,type){
+     let i;
+   for(i=0;i<data.length;i++){
+    if (data[i][type]===[]||data[i][type]===null){
+    }
+    else if (data[i][type]===id.id||data[i][type]===id.id){
+       console.log(data[i].firstName+' '+data[i].lastName);
+     }
+     else{
+     }
+  }
+}
+
+displayFamilymembers(people,people[11],'currentSpouse')
+
+// function findFamilyMembersById(data,index,section, type){
+//   let i;
+//   for(i=0;i<data.length;i++){
+//     if(data[i][type]===[]||data[i][type]===null){
+
+//     }
+//     else if (data[i][type]===index[section]||data[i][type]===index[section]){
+//       console.log(data[i].firstName+' '+data[i].lastName);
+//     }
+//     else{
+//   }
+// }
+// }
+
+
+function findDesendents(data, id) {
   let i;
     for( i=0; i < data.length; i++) {
         if (data[i].parents[0] === id) {
-          console.log(data[i].firstName+' '+data[i].lastName);
-          findParentsById(people, data[i].id);
+          findDesendents(people, data[i].id);
         }
         else if(data[i].parents[1] === id) {
-          console.log(data[i].firstName+' '+data[i].lastName);
-          findParentsById(people, data[i].id);
+          findDesendents(people, data[i].id);
 
         }  
         else{
         }
-    }
+}
 }
 
-findParentsById(people, 693243224)
+// findDesendents(people, 693243224)
 
 //test to commit
 // Menu function to call once you find who you are looking for
@@ -143,11 +193,23 @@ function searchByName(people){
 
 
 
+<<<<<<< HEAD
 function searchByGender(people){
   var inputGender = promptFor("Is the person male or female?", chars);
   //let i;
 
   //for(i=0; i < people.length; i++) 
+=======
+
+// function searchByGender(){
+//   var inputGender = promptFor("Is the person male or female?", chars);
+//   let i;
+
+function searchByGender(){
+  var inputGender = promptFor("Is the person male or female?", chars);
+  let i;
+  for(i=0; i < people.length; i++) 
+>>>>>>> bc18cc0c3cfb7934eb158703ddf291dc0f4a87e5
   var foundGender = people.filter(function(person){
     if(person.gender === inputGender){
       displayPerson(person); //////create a list that displays with all info in one box/like alert but not 
@@ -322,5 +384,23 @@ getHeight('6','2')
 
 ////////idea: for the get age function we can do people.age = getAge(dateString) function///////
 
+<<<<<<< HEAD
 
   
+=======
+// function searchByHeight(people){
+//   var inputHeight = promptFor("How tall is the person you're looking for?", chars);
+
+//   var foundHeight = people.filter(function(person){
+//     if(person.height === inputHeight){
+//       return true;
+//     }
+//     else{
+//       alert("Please enter height measured in feet")
+//       return searchByHeight(people);
+//     }
+//   })
+//   // TODO: find the person using the height they entered
+//   return foundHeight;
+// }
+>>>>>>> bc18cc0c3cfb7934eb158703ddf291dc0f4a87e5
