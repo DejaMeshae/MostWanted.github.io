@@ -1,3 +1,4 @@
+
 "use strict"
 /*
 Build all of your functions for displaying and gathering information below (GUI).
@@ -9,13 +10,15 @@ let people=data;
 
 // app is the function called to start the entire application
 function app(people){
+  getAge(people);
   var searchType;
    searchType = promptFor("Do you know the name of the person you are looking for? Please enter 'yes' or 'no'", yesNo).toLowerCase();
-  switch(searchType){                   ///////fuction to slice and cap first character add that in later////
+  switch(searchType){           ///////fuction to slice and cap first character add that in later////
     case 'yes':
       var foundName= searchByName(people);
       mainMenu(foundName, people);
       break;
+
     case "no": 
   }
     var searchTrait = prompt("Please enter the trait you would like to search by: \r\n First Name \r\n Last Name \r\n Gender \r\n Age \r\n Height \r\n Weight \r\n Eye color \r\n Occupation").toLowerCase();
@@ -58,32 +61,30 @@ function app(people){
 function compareParentsById(data,id){
   let i;
   for(i=0;i<data.length;i++){
-
-    if(data[i].parents[0] === id.parents[0]||data[i].parents[1]=== id.parents[0]){
+    if(data[i].id===id){
+    }
+    else if(id=== []){
+    }
+    else if(data[i].parents[0] === id[0]||data[i].parents[1]=== id[0]){
       console.log(data[i].firstName+' '+data[i].lastName);
     }
-    else if(data[i].parents[0] === id.parents[0]||data[i].parents[1]=== id.parents[0]){
+    else if(data[i].parents[0] === id[1]||data[i].parents[1]=== id[1]){
       console.log(data[i].firstName+' '+data[i].lastName);
     }
   else{
   }
 }
 }
-// compareParentsById(people, people[10])
+compareParentsById(people, people[10])
 
-function test(data,id,type){
-  //type=type.toString
-  console.log(data[id][type])
-}
 
-test(people,0, "dob");
 
-function displayFamilymembers(data,id,type){
+function displayFamilymembers(data,id){
      let i;
    for(i=0;i<data.length;i++){
-    if (data[i][type]===[]||data[i][type]===null){
+    if (data[i].currentSpouse===null){
     }
-    else if (data[i][type]===id.id||data[i][type]===id.id){
+    else if (data[i].currentSpouse===id){
        console.log(data[i].firstName+' '+data[i].lastName);
      }
      else{
@@ -91,7 +92,6 @@ function displayFamilymembers(data,id,type){
   }
 }
 
-displayFamilymembers(people,people[11],'currentSpouse')
 
 // function findFamilyMembersById(data,index,section, type){
 //   let i;
@@ -140,29 +140,38 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    displayPerson(person);  ///displays person info 
+    displayPerson(person);   
     break;
+    
     case "family":
-    displayFamilymembers(data,id,type)   ////get person's family
+    let spouse = displayFamilymembers(people, person.id, "current spouse");   
+    let kids = findDesendents (people, person.id);
+    let parents = compareParentsById (people, person.parents);
+    alert("Spouse " + spouse + " " + "Kids " + kids + " " + "Parents "+ parents);
     break;
+    
     case "descendants":
-    findDesendents(data, id);           //displays desendents not finish still working it 
+    findDesendents(people, person.id);    
+    let children = findDesendents (people, person.id);
+    alert("Children " + children);
     break;
+
     case "restart":
     app(people); // restart
     break;
+    
     case "quit":
     alert("Thank you for using our search engine!", chars);
     return app(people);
     default:
   }
-  var searchComplete = promptFor("Would you like more info on that person or are you finished? Please enter 'yes' for more info or 'no' for im finished", yesNo).toLowerCase();
+  var searchComplete = promptFor("Would you like more info on that person or are you finished with your search? Please enter 'yes' for more info or 'no' for im finished", yesNo).toLowerCase();
   switch(searchComplete){
     case 'yes':
       return mainMenu(person, people);  /////loops back to displayOption line 56 
     case "no": 
     alert("Thank you for using our search engine!", chars);
-    break;///////creates an infinate loop figure out how to end it 
+    break;
   }
 }
 
@@ -171,7 +180,7 @@ function searchByName(people){
   var lastName = promptFor("What is the person's last name?", chars);
   let i;
 
-  for(i=0; i < people.length; i++)   /////creates an infinate loop figure out how to end it 
+  for(i=0; i < people.length; i++)  
   var foundName = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
       displayPerson(person);
@@ -187,11 +196,10 @@ function searchByName(people){
       return false;
     }
   })
-  return foundName[0];
+  return foundName;
 }
 
 
-///shows list then comes back undefinded fix it.
 function searchByGender(people){
   var inputGender = promptFor("Is the person male or female?", chars);
   //let i;
@@ -199,64 +207,74 @@ function searchByGender(people){
   //for(i=0; i < people.length; i++) 
   var foundGender = people.filter(function(person){
     if(person.gender === inputGender){
-      alert("\r\n Billy Bob \r\n Michael Walkens \r\n Jon Walkens \r\n Jack Pafoy\r\n Mister Potatoo \r\n Mader Madden \r\n Ralph Bob \r\n Dave Pafoy \r\n Mattias Madden \r\n"); //list of males      return true;
-      searchByEyeColor(people); //follow up with eye color to narrow the search down even further
+      displayPerson(person);   //display a list of male or females names or function in an array where it'll work with any names 
+      mainMenu(person, people); /////then search by 2-5 filter refine search further
+       //follow up with another trait to narrow the search down even further
     }
-    else if(person.gender === inputGender){  ////females dont show up. when females is types goes back to showing males
-      alert("\r\n Uma Bob \r\n Jen Pafoy \r\n Missuz Potatoo \r\n Joy Madden \r\n Jill Pafoy \r\n Jasmine Bob \r\n Annie Pafoy \r\n Amii \r\n Regina Madden \r\n Hana Madded \r\n Eloise Madden \r\n Ellen Madden r\n Joey Madden");
-      searchByEyeColor(people);
-      return true;
-      }
     else{
+      searchByGender(people)
       return false;
     }
   })
   // TODO: find the person using the gender they entered
-  return foundGender; ////added for loop but only goes through the first person
+  return foundGender; 
 }
 
-
-
-
-////age is only working for the first person, billy fix this
+///issues with age: 
 function searchByAge(people){
   var userInputForAge = promptFor("Enter the person's age?", chars);
 
-  var foundPersonByAge = people.filter(function(person){
-    if(getAge(person.dob) == userInputForAge){
-      displayPerson(person); 
-      mainMenu(person, people); /////then search by 2-5 filter refine search further
-      return true;
-    }
-    else{
-      searchByAge(people);
+
+  var foundPersonByAge = people.filter(function(el){
+    if (userInputForAge == el.age){ 
+      displayPerson(el); 
+      //mainMenu(person, people); /////then search by 2-5 filter refine search further
+      return true;  
+    } 
+    else{ 
       return false;
     }
-  })
-  // TODO: find the person using the weight they entered
-  return foundPersonByAge[0];  
+  });
+
+ if (foundPersonByAge.length == 1) {
+ mainMenu(foundPersonByAge, people)
+ }
+ else if (foundPersonByAge.length > 1) {
+   app(foundPersonByAge)
+ } 
+ else{
+ }
+return foundPersonByAge;
 }
 
 
-////not poping up person who matches age height, work on that
 function searchByHeight(people){
-  var userInputHeight = promptFor("How tall is the person you're looking for?", chars);
+  var userInputFeet = promptFor("How tall is the person you're looking for in feet?", chars);
+  var userInputInches = promptFor("How tall is the person you're looking for in inches?", chars);
   
   var foundHeight = people.filter(function(person){
-    if(getHeight(person.height) == userInputHeight){
+    if((person.height) == getHeight(userInputFeet, userInputInches)){
       displayPerson(person);
-      mainMenu(person, people); /////then search by 2-5 filter refine search further
+      //mainMenu(person, people);   /////then search by 2-5 filter refine search further
       return true;
     }
-    else{
-      return searchByHeight(people);
+    else{ 
+      return false;
     }
-  })
-  // TODO: find the person using the height they entered
-  return foundHeight[0];
+  });
+   if (foundHeight.length == 1) {
+    mainMenu(foundHeight, people)
+    }
+    else if (foundHeight.length > 1) {
+      app(foundHeight)
+    } 
+    else{
+    }
+  return foundHeight;
 }
 
-//WORKING done but if theres 2 people that weigh the same figure how to choose that one person
+
+//issues with weight: work on arrays not functions in a function/// so a list of the people who match the critera pops up 
 function searchByWeight(people){
   var inputWeight = promptFor("How much does the person weigh?", chars);
 
@@ -269,27 +287,48 @@ function searchByWeight(people){
       return false;
     }
   })
-  // TODO: find the person using the weight they entered
-  return foundPersonByWeight[0]; 
+
+  if (foundPersonByWeight.length == 1) {
+    mainMenu(foundPersonByWeight, people)
+    }
+    else if (foundPersonByWeight.length > 1) {
+      app(foundPersonByWeight)
+    } 
+    else{
+    }
+
+  return foundPersonByWeight; 
 }
 
   
-//works! this function is done but add more refine search further
+
+//This function is done but add more refine search further
 function searchByEyeColor(people){
   var inputEyeColor = promptFor("What color is the person eyes?", chars);
   
   var foundEyeColor = people.filter(function(person){
     if(person.eyeColor === inputEyeColor){
+      ///then pull from that array to make the hole smaller
       displayPerson(person);  /////then search by 2-5 filter refine search further
+      //mainMenu(person, people);  //work on display list with prompt then main menu prompt who would you like to know more about
       return true;
     }
     else{
       return false;
     }
   })
-  // TODO: find the person using the color they entered
+
+  if (foundEyeColor.length == 1) {
+    mainMenu(foundEyeColor, people)
+    }
+    else if (foundEyeColor.length > 1) {
+      app(foundEyeColor)
+    } 
+    else{
+    }
   return foundEyeColor;
 }
+
 
 
 function searchByOccupation(people){
@@ -298,14 +337,22 @@ function searchByOccupation(people){
   var foundOccupation = people.filter(function(person){
     if(person.occupation === inputOccupation){
       displayPerson(person);
-      mainMenu(person, people);  ///displays just the first person
+      //mainMenu(person, people); //then search by 2-5 filter refine search further
       return true;
     }
     else{
       return false;
     }
   })
-  // TODO: find the person using the color they entered
+
+  if (foundOccupation.length == 1) {
+    mainMenu(foundOccupation, people)
+    }
+    else if (foundOccupation.length > 1) {
+      app(foundOccupation)
+    } 
+    else{
+    }
   return foundOccupation;
 }
 
@@ -318,7 +365,6 @@ function displayPeople(people){
     
   }).join("\n"));
 }
-
 
 function displayPerson(person){
   // print all of the information about a person:
@@ -358,16 +404,17 @@ function chars(input){
 }
 
 ///////Age function
-function getAge(dateString) {
+function getAge(people) {
+  people.map(function(el){
     let today = new Date();
-    let birthDate = new Date(dateString);
+    let birthDate = new Date(el.dob);
     let age = today.getFullYear() - birthDate.getFullYear();
     let m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
-    console.log(age);
-    return age;
+    el.age = age;
+  });
 }
 
 
