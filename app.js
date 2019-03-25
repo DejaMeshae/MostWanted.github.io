@@ -412,9 +412,8 @@ function getAge(people) {
     let m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
-    }
+
     el.age = age;
-  });
 }
 
 
