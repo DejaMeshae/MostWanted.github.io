@@ -49,7 +49,6 @@ function app(people){
         var foundOccupation= searchByOccupation(people);
         mainMenu(foundOccupation, people);
         break;
-          // TODO: search by traits
         default:
     app(people); // restart app
       break;   
@@ -147,7 +146,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
-    // TODO: get person's descendants
+    findDesendents(data, id); //displays desendents not finish still working it 
     break;
     case "restart":
     app(people); // restart
@@ -178,7 +177,7 @@ function searchByName(people){
       displayPerson(person);
       mainMenu(person, people);
     }
-        else if(person.firstName === firstName){
+    else if(person.firstName === firstName){
       return true;
     }
     else if(person.lastName=== lastName){
@@ -192,32 +191,22 @@ function searchByName(people){
 }
 
 
-
-<<<<<<< HEAD
+///shows list then comes back undefinded fix it.
 function searchByGender(people){
   var inputGender = promptFor("Is the person male or female?", chars);
   //let i;
 
   //for(i=0; i < people.length; i++) 
-=======
-
-// function searchByGender(){
-//   var inputGender = promptFor("Is the person male or female?", chars);
-//   let i;
-
-function searchByGender(){
-  var inputGender = promptFor("Is the person male or female?", chars);
-  let i;
-  for(i=0; i < people.length; i++) 
->>>>>>> bc18cc0c3cfb7934eb158703ddf291dc0f4a87e5
   var foundGender = people.filter(function(person){
     if(person.gender === inputGender){
-      displayPerson(person); //////create a list that displays with all info in one box/like alert but not 
-      
-      return true;
+      alert("\r\n Billy Bob \r\n Michael Walkens \r\n Jon Walkens \r\n Jack Pafoy\r\n Mister Potatoo \r\n Mader Madden \r\n Ralph Bob \r\n Dave Pafoy \r\n Mattias Madden \r\n"); //list of males      return true;
+      searchByEyeColor(people);
     }
+    if(person.gender === inputGender){
+      alert("\r\n Uma Bob \r\n Jen Pafoy \r\n Missuz Potatoo \r\n Joy Madden \r\n Jill Pafoy \r\n Jasmine Bob \r\n Annie Pafoy \r\n Amii \r\n Regina Madden \r\n Hana Madded \r\n Eloise Madden \r\n Ellen Madden r\n Joey Madden");
+      return true;
+      }
     else{
-      //alert("Have you found the person you're looking for? click okay to return to the start.")
       return false;
     }
   })
@@ -305,8 +294,27 @@ function searchByEyeColor(people){
     }
   })
   // TODO: find the person using the color they entered
-  return foundEyeColor[0];
+  return foundEyeColor;
 }
+
+
+function searchByOccupation(people){
+  var inputOccupation = promptFor("What is the person's occupation?", chars);
+
+  var foundOccupation = people.filter(function(person){
+    if(person.occupation === inputOccupation){
+      displayPerson(person);
+      mainMenu(person, people);  ///displays just the first person
+      return true;
+    }
+    else{
+      return false;
+    }
+  })
+  // TODO: find the person using the color they entered
+  return foundOccupation;
+}
+
 
 
 // alerts a list of people
@@ -384,10 +392,6 @@ getHeight('6','2')
 
 ////////idea: for the get age function we can do people.age = getAge(dateString) function///////
 
-<<<<<<< HEAD
-
-  
-=======
 // function searchByHeight(people){
 //   var inputHeight = promptFor("How tall is the person you're looking for?", chars);
 
@@ -403,4 +407,3 @@ getHeight('6','2')
 //   // TODO: find the person using the height they entered
 //   return foundHeight;
 // }
->>>>>>> bc18cc0c3cfb7934eb158703ddf291dc0f4a87e5
