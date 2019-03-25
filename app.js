@@ -46,6 +46,7 @@ function app(people){
 function compareParentsById(data,id){
   let i;
   for(i=0;i<data.length;i++){
+
     if(data[i].parents[0] === id.parents[0]||data[i].parents[1]=== id.parents[0]){
       console.log(data[i].firstName+' '+data[i].lastName);
     }
@@ -56,37 +57,61 @@ function compareParentsById(data,id){
   }
 }
 }
-compareParentsById(people, people[10])
+// compareParentsById(people, people[10])
 
-function findFamilyMembersById(data,id){
-  findParentsById(data, id);
-  compareParentsById(data,id);
-  let i;
-  for(i=0;i<data.length;i++){
-    if (data[i].currentSpouse[0]===id){
-      console.log(data[i].firstName+' '+data[i].lastName);
+function test(data,id,type){
+  //type=type.toString
+  console.log(data[id][type])
+}
+
+test(people,0, "dob");
+
+function displayFamilymembers(data,id,type){
+     let i;
+   for(i=0;i<data.length;i++){
+    if (data[i][type]===[]||data[i][type]===null){
     }
-    else if(data[i].parents){
+    else if (data[i][type]===id.id||data[i][type]===id.id){
+       console.log(data[i].firstName+' '+data[i].lastName);
+     }
+     else{
+     }
   }
 }
-}
 
-function findParentsById(data, id) {
+displayFamilymembers(people,people[11],'currentSpouse')
+
+// function findFamilyMembersById(data,index,section, type){
+//   let i;
+//   for(i=0;i<data.length;i++){
+//     if(data[i][type]===[]||data[i][type]===null){
+
+//     }
+//     else if (data[i][type]===index[section]||data[i][type]===index[section]){
+//       console.log(data[i].firstName+' '+data[i].lastName);
+//     }
+//     else{
+//   }
+// }
+// }
+
+
+function findDesendents(data, id) {
   let i;
     for( i=0; i < data.length; i++) {
         if (data[i].parents[0] === id) {
-          findParentsById(people, data[i].id);
+          findDesendents(people, data[i].id);
         }
         else if(data[i].parents[1] === id) {
-          findParentsById(people, data[i].id);
+          findDesendents(people, data[i].id);
 
         }  
         else{
         }
-    }
+}
 }
 
-findParentsById(people, 693243224)
+// findDesendents(people, 693243224)
 
 //test to commit
 // Menu function to call once you find who you are looking for
@@ -152,6 +177,8 @@ function searchByName(people){
   })
   return foundName[0];
 }
+
+
 
 
 // function searchByGender(){
