@@ -9,13 +9,15 @@ let people=data;
 
 // app is the function called to start the entire application
 function app(people){
+  getAge(people);
   var searchType;
    searchType = promptFor("Do you know the name of the person you are looking for? Please enter 'yes' or 'no'", yesNo).toLowerCase();
-  switch(searchType){                   ///////fuction to slice and cap first character add that in later////
+  switch(searchType){           ///////fuction to slice and cap first character add that in later////
     case 'yes':
       var foundName= searchByName(people);
       mainMenu(foundName, people);
       break;
+
     case "no": 
   }
     var searchTrait = prompt("Please enter the trait you would like to search by: \r\n First Name \r\n Last Name \r\n Gender \r\n Age \r\n Height \r\n Weight \r\n Eye color \r\n Occupation").toLowerCase();
@@ -156,7 +158,7 @@ function mainMenu(person, people){
     return app(people);
     default:
   }
-  var searchComplete = promptFor("Would you like more info on that person or are you finished? Please enter 'yes' for more info or 'no' for im finished", yesNo).toLowerCase();
+  var searchComplete = promptFor("Would you like more info on that person or are you finished with your search? Please enter 'yes' for more info or 'no' for im finished", yesNo).toLowerCase();
   switch(searchComplete){
     case 'yes':
       return mainMenu(person, people);  /////loops back to displayOption line 56 
@@ -199,46 +201,55 @@ function searchByGender(people){
   //for(i=0; i < people.length; i++) 
   var foundGender = people.filter(function(person){
     if(person.gender === inputGender){
-      alert("\r\n Billy Bob \r\n Michael Walkens \r\n Jon Walkens \r\n Jack Pafoy\r\n Mister Potatoo \r\n Mader Madden \r\n Ralph Bob \r\n Dave Pafoy \r\n Mattias Madden \r\n"); //list of males      return true;
+      displayPerson(person);   //display a list of male or females names or function in an array where it'll work with any names 
+      mainMenu(person, people); /////then search by 2-5 filter refine search further
       searchByEyeColor(people); //follow up with eye color to narrow the search down even further
     }
-    else if(person.gender === inputGender){  ////females dont show up. when females is types goes back to showing males
-      alert("\r\n Uma Bob \r\n Jen Pafoy \r\n Missuz Potatoo \r\n Joy Madden \r\n Jill Pafoy \r\n Jasmine Bob \r\n Annie Pafoy \r\n Amii \r\n Regina Madden \r\n Hana Madded \r\n Eloise Madden \r\n Ellen Madden r\n Joey Madden");
-      searchByEyeColor(people);
-      return true;
-      }
     else{
+      searchByGender(people)
       return false;
     }
   })
   // TODO: find the person using the gender they entered
-  return foundGender; ////added for loop but only goes through the first person
+  return foundGender; 
 }
 
 
 
-
-////age is only working for the first person, billy fix this
+///issues with age: 
 function searchByAge(people){
   var userInputForAge = promptFor("Enter the person's age?", chars);
 
-  var foundPersonByAge = people.filter(function(person){
-    if(getAge(person.dob) == userInputForAge){
-      displayPerson(person); 
-      mainMenu(person, people); /////then search by 2-5 filter refine search further
-      return true;
-    }
-    else{
-      searchByAge(people);
+
+  var foundPersonByAge = people.filter(function(el){
+    if (userInputForAge == el.age){ 
+      displayPerson(el); 
+      //mainMenu(person, people); /////then search by 2-5 filter refine search further
+      return true;  
+    } 
+    else{ 
       return false;
     }
-  })
-  // TODO: find the person using the weight they entered
-  return foundPersonByAge[0];  
+  });
+
+ if (foundPersonByAge.length == 1) {
+ mainMenu(foundPersonByAge, people)
+ }
+ else if (foundPersonByAge.length > 1) {
+   app(foundPersonByAge)
+ } 
+ else{
+
+ }
+return foundPersonByAge;
 }
 
 
-////not poping up person who matches age height, work on that
+
+
+
+
+
 function searchByHeight(people){
   var userInputHeight = promptFor("How tall is the person you're looking for?", chars);
   
@@ -256,7 +267,8 @@ function searchByHeight(people){
   return foundHeight[0];
 }
 
-//WORKING done but if theres 2 people that weigh the same figure how to choose that one person
+//Works! done but if theres 2 people that weigh the same figure how to choose that one person
+//issues with weight: work on arrays not functions in a function/// so a list of the people who match the critera pops up 
 function searchByWeight(people){
   var inputWeight = promptFor("How much does the person weigh?", chars);
 
@@ -281,6 +293,7 @@ function searchByEyeColor(people){
   var foundEyeColor = people.filter(function(person){
     if(person.eyeColor === inputEyeColor){
       displayPerson(person);  /////then search by 2-5 filter refine search further
+      mainMenu(person, people);  //work on display list with prompt then main menu prompt who would you like to know more about
       return true;
     }
     else{
@@ -291,14 +304,14 @@ function searchByEyeColor(people){
   return foundEyeColor;
 }
 
-
+/////works! this function is done but add more refine search further
 function searchByOccupation(people){
   var inputOccupation = promptFor("What is the person's occupation?", chars);
 
   var foundOccupation = people.filter(function(person){
     if(person.occupation === inputOccupation){
       displayPerson(person);
-      mainMenu(person, people);  ///displays just the first person
+      mainMenu(person, people); /////then search by 2-5 filter refine search further
       return true;
     }
     else{
@@ -358,16 +371,18 @@ function chars(input){
 }
 
 ///////Age function
-function getAge(dateString) {
+function getAge(people) {
+  people.map(function(el){
     let today = new Date();
-    let birthDate = new Date(dateString);
+    let birthDate = new Date(el.dob);
     let age = today.getFullYear() - birthDate.getFullYear();
     let m = today.getMonth() - birthDate.getMonth();
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }
     console.log(age);
-    return age;
+    el.age = age;
+  });
 }
 
 
