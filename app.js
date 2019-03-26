@@ -5,9 +5,6 @@ Build all of your functions for displaying and gathering information below (GUI)
 */
 let people=data;
 
-
-
-
 // app is the function called to start the entire application
 function app(people){
   getAge(people);
@@ -63,7 +60,7 @@ function compareParentsById(data,id){
   for(i=0;i<data.length;i++){
     if(data[i].id===id){
     }
-    else if(id=== []){
+    else if(id=== []||data.parents===[]){
     }
     else if(data[i].parents[0] === id[0]||data[i].parents[1]=== id[0]){
       console.log(data[i].firstName+' '+data[i].lastName);
@@ -75,9 +72,6 @@ function compareParentsById(data,id){
   }
 }
 }
-compareParentsById(people, people[10])
-
-
 
 function displayFamilymembers(data,id){
      let i;
@@ -92,7 +86,6 @@ function displayFamilymembers(data,id){
   }
 }
 
-
 // function findFamilyMembersById(data,index,section, type){
 //   let i;
 //   for(i=0;i<data.length;i++){
@@ -106,7 +99,6 @@ function displayFamilymembers(data,id){
 //   }
 // }
 // }
-
 
 function findDesendents(data, id) {
   let i;
@@ -125,7 +117,6 @@ function findDesendents(data, id) {
 }
 }
 
-// findDesendents(people, 693243224)
 
 //test to commit
 // Menu function to call once you find who you are looking for
@@ -151,7 +142,7 @@ function mainMenu(person, people){
     let parents = compareParentsById (people, person.parents);
     let x;
      for(x=0; x < people.length; x++)  
-    alert("Spouse " + displayperson(spouse[0]) + " " + "Kids " + displayPerson(kids[x]) + " " + "Parents "+ parents[0,1]);
+    alert("Spouse " + spouse + " " + "Kids " + kids + " " + "Parents "+ parents);
     break;
     
     case "descendants":
@@ -165,6 +156,9 @@ function mainMenu(person, people){
     case "restart":
     app(people); // restart
     break;
+
+    case 'banana':
+    alert('https://imgur.com/gallery/50fTj')
     
     case "quit":
     alert("Thank you for using our search engine!", chars);
@@ -205,7 +199,6 @@ function searchByName(people){
   })
   return foundName;
 }
-
 
 function searchByGender(people){
   var inputGender = promptFor("Is the person male or female?", chars);
@@ -254,7 +247,6 @@ function searchByAge(people){
 return foundPersonByAge;
 }
 
-
 function searchByHeight(people){
   var userInputFeet = promptFor("How tall is the person you're looking for in feet?", chars);
   var userInputInches = promptFor("How tall is the person you're looking for in inches?", chars);
@@ -279,7 +271,6 @@ function searchByHeight(people){
     }
   return foundHeight;
 }
-
 
 //issues with weight: work on arrays not functions in a function/// so a list of the people who match the critera pops up 
 function searchByWeight(people){
@@ -306,8 +297,6 @@ function searchByWeight(people){
 
   return foundPersonByWeight; 
 }
-
-  
 
 //This function is done but add more refine search further
 function searchByEyeColor(people){
@@ -336,8 +325,6 @@ function searchByEyeColor(people){
   return foundEyeColor;
 }
 
-
-
 function searchByOccupation(people){
   var inputOccupation = promptFor("What is the person's occupation?", chars);
 
@@ -363,8 +350,6 @@ function searchByOccupation(people){
   return foundOccupation;
 }
 
-
-
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -388,7 +373,6 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
@@ -396,9 +380,6 @@ function promptFor(question, valid){
   } while(!response || !valid(response));
   return response;
 }
-
-
-
 
 // helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
@@ -410,7 +391,6 @@ function chars(input){
   return true; // default validation only
 }
 
-///////Age function
 function getAge(people) {
   people.map(function(el){
     let today = new Date();
@@ -427,9 +407,6 @@ function getAge(people) {
 })
 }
 
-
-
-////Height function
 function getHeight(heightStringFeet, heightStringInches){
   let feet=heightStringFeet*12;
   let inches=heightStringInches*1;
@@ -437,25 +414,3 @@ function getHeight(heightStringFeet, heightStringInches){
   console.log(height);
   return height
 }
-
-//getHeight(6,2)
-
-//getHeight('6','2')
-
-////////idea: for the get age function we can do people.age = getAge(dateString) function///////
-
-// function searchByHeight(people){
-//   var inputHeight = promptFor("How tall is the person you're looking for?", chars);
-
-//   var foundHeight = people.filter(function(person){
-//     if(person.height === inputHeight){
-//       return true;
-//     }
-//     else{
-//       alert("Please enter height measured in feet")
-//       return searchByHeight(people);
-//     }
-//   })
-//   // TODO: find the person using the height they entered
-//   return foundHeight;
-// }
