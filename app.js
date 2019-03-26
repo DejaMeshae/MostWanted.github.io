@@ -113,9 +113,11 @@ function findDesendents(data, id) {
     for( i=0; i < data.length; i++) {
         if (data[i].parents[0] === id) {
           findDesendents(people, data[i].id);
+          return true
         }
         else if(data[i].parents[1] === id) {
           findDesendents(people, data[i].id);
+          return true
 
         }  
         else{
@@ -147,13 +149,17 @@ function mainMenu(person, people){
     let spouse = displayFamilymembers(people, person.id, "current spouse");   
     let kids = findDesendents (people, person.id);
     let parents = compareParentsById (people, person.parents);
-    alert("Spouse " + spouse + " " + "Kids " + kids + " " + "Parents "+ parents);
+    let x;
+     for(x=0; x < people.length; x++)  
+    alert("Spouse " + displayperson(spouse[0]) + " " + "Kids " + displayPerson(kids[x]) + " " + "Parents "+ parents[0,1]);
     break;
     
     case "descendants":
     findDesendents(people, person.id);    
     let children = findDesendents (people, person.id);
-    alert("Children " + children);
+    let i;
+     for(i=0; i < children.length; i++)  
+    alert("Children " + displayPerson(children[i]));
     break;
 
     case "restart":
@@ -163,6 +169,7 @@ function mainMenu(person, people){
     case "quit":
     alert("Thank you for using our search engine!", chars);
     return app(people);
+
     default:
   }
   var searchComplete = promptFor("Would you like more info on that person or are you finished with your search? Please enter 'yes' for more info or 'no' for im finished", yesNo).toLowerCase();
@@ -410,11 +417,16 @@ function getAge(people) {
     let birthDate = new Date(el.dob);
     let age = today.getFullYear() - birthDate.getFullYear();
     let m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    if (m < 0 || m === 0 && today.getDate() < birthDate.getDate()) {
         age--;
+      }
+    else{
 
+    }    
     el.age = age;
+})
 }
+
 
 
 ////Height function
