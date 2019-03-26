@@ -207,8 +207,9 @@ function searchByGender(people){
   //for(i=0; i < people.length; i++) 
   var foundGender = people.filter(function(person){
     if(person.gender === inputGender){
-      displayPerson(person);   //display a list of male or females names or function in an array where it'll work with any names 
-      mainMenu(person, people); /////then search by 2-5 filter refine search further
+    displayPerson(person);
+    return true   //display a list of male or females names or function in an array where it'll work with any names 
+     /////then search by 2-5 filter refine search further
        //follow up with another trait to narrow the search down even further
     }
     else{
@@ -217,7 +218,15 @@ function searchByGender(people){
     }
   })
   // TODO: find the person using the gender they entered
-  return foundGender; 
+  if (foundGender.length == 1) {
+ mainMenu(foundGender, people)
+ }
+ else if (foundGender.length > 1) {
+   app(foundGender);
+ } 
+ else{
+ }
+return foundGender;
 }
 
 ///issues with age: 
